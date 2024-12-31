@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+#resposta_ex_4
+
+#usar sed para substituir certos caracteres por espaço vazio
+#substituir os espaços vazios por quebra de linha usando tr
+#usar awk colocar todas as linhas em minúsculo
+#sort para organizar em ordem alfabética
+#uniq -c para contar as ocorrências e remover linhas duplicadas
+#sort -nr para classificar em ordem crescente de ocorrência 
+
+
+sed 's/[*** : . ; , ! ? % ( ) & '"'"' " “]/ /g' ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/contos/macn001.txt | tr ' ' '\n' | awk '{print tolower($0)}' | sort | uniq -c | sort -n >> ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Solução/resposta_ex_4

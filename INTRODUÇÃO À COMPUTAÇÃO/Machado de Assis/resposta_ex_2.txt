@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+#resposta_ex_2
+
+
+#alterei alguns arquivos localizados em ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/cronica/
+
+
+#com comando cut, grep, sort e uniq
+
+touch titulos.txt;
+for i in ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/*/*.txt; do
+	head -qn 1 "$i" >> titulos.txt;
+done;
+t=$(cut -d "," -f2 titulos.txt | grep -v '^$' | sort -bu | uniq);
+echo "$t" >> ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Solução/resposta_ex_2;
+rm titulos.txt;
+
+
+#com comando sed, grep, sort e uniq
+
+touch titulos.txt;
+for i in ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/*/*.txt; do
+	head -qn 1 "$i" >> titulos.txt;
+done;
+t=$(sed 's/^[^,]*,//' titulos.txt | sed 's/,[^,]*$//' | grep -v '^$' | sort -bu | uniq);
+echo "$t" >> ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Solução/resposta_ex_2;
+rm titulos.txt;
+

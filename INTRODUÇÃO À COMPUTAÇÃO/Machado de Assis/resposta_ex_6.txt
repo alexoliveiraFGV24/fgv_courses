@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+#resposta_ex_6
+
+
+#fiz o mesmo código da 5 e adicionei grep -E "^ *[[:digit:]]{4}"
+
+touch palavras_machado_1000.txt
+for a in ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/*/*.txt; do
+    cat "$a" >> palavras_machado_1000.txt
+done
+sed 's/[*** : . ; , ! ? % ( ) & " '"'"' “]/ /g' palavras_machado_1000.txt | tr ' ' '\n' | awk '{print tolower($0)}' | sort | uniq -c | sort -n | grep -E "^ *[[:digit:]]{4}" >> ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Solução/resposta_ex_6
+rm palavras_machado_1000.txt

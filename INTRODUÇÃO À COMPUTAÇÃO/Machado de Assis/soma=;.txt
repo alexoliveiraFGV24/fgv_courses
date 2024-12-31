@@ -1,0 +1,32 @@
+soma="";
+for i in ~/IC/manipulando-textos-no-terminal-24-1-time_ic/Dados/machado/*/*.txt; do
+	titulo=$(head -n 1 "$i" | sed 's/\./\,/g');
+	qtd=$(echo "$titulo" | grep -o ',' | wc -l);
+	if [ $qtd -gt 2 ]; then
+		contador=0;
+		for (( j = 0; j < ${#titulo}; j++ )); do
+			if [ "${titulo:j:1}" = ',' ]; then
+				contador=$((contador+1));
+			fi;
+			if [ $contador -eq 2 ] && [ $qtd -eq 3 ]; then
+				titulo=${titulo:0:j}${titulo:j+1};
+				break;
+			fi;
+			if [ $qtd -eq 4 ]; then
+				if [ $contador -eq 2 ]; then
+					titulo=${titulo:0:j}${titulo:j+1};
+				fi;
+				if [ $contador -eq 3 ]; then
+					titulo=${titulo:0:j}${titulo:j+1};
+					break;
+				fi;
+			fi;
+
+		done;
+	fi;
+	titulo=$(echo "$titulo" | cut -d ',' -f2 | awk '{$1=$1};1');
+	soma="$soma $titulo \n";
+	
+done;
+soma=$(echo -e "$soma" | sort -u | uniq);
+echo -e "$soma";
